@@ -44,15 +44,24 @@ extern "C" {
 #include <hagl/color.h>
 
 /* HAL must provide display dimensions and depth. This HAL */
-/* defaults to 53x11. Alternative dimensions can be passed */
-/* using compiler flags. */
+/* defaults to 106x22 which is twice the size of the hardware screen at 53x11.
+ * Alternative dimensions can be passed using compiler flags. */
 #ifndef DISPLAY_WIDTH
-#define DISPLAY_WIDTH   (53)
+#define DISPLAY_WIDTH   (106)
 #endif
 #ifndef DISPLAY_HEIGHT
-#define DISPLAY_HEIGHT  (11)
+#define DISPLAY_HEIGHT  (22)
 #endif
 #define DISPLAY_DEPTH   (24)
+
+/* Change these if you've changed the display width/height above.
+ * These are used with shift (SAL) operation so 0 means no division and 1 means divide by 2. */
+#ifndef GALACTIC_PIXEL_DIVISOR_X
+#define GALACTIC_PIXEL_DIVISOR_X  (1)
+#endif
+#ifndef GALACTIC_PIXEL_DIVISOR_Y
+#define GALACTIC_PIXEL_DIVISOR_Y  (1)
+#endif
 
 /** HAL must provide typedef for colors. This HAL uses RGB888. */
 typedef uint32_t color_t;

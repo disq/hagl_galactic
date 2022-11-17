@@ -55,7 +55,7 @@ put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
   uint8_t g = (color >> 8) & 0xFF;
   uint8_t b = color & 0xFF;
   graphics.set_pen(r, g, b);
-  graphics.pixel(Point(x0, y0));
+  graphics.pixel(Point(x0 >> GALACTIC_PIXEL_DIVISOR_X, y0 >> GALACTIC_PIXEL_DIVISOR_Y));
 }
 
 static size_t
