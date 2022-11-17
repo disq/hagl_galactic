@@ -3,6 +3,7 @@
 MIT License
 
 Copyright (c) 2018-2022 Mika Tuupola
+Copyright (c) 2022 Kemal Hadimli
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +25,15 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for the HAGL graphics library:
-https://github.com/tuupola/hagl_gd
+This file is part of the Galactic HAL for the HAGL graphics library:
+https://github.com/disq/hagl_galactic
 
 SPDX-License-Identifier: MIT
 
 */
 
-#ifndef _HAGL_GD_HAL_H
-#define _HAGL_GD_HAL_H
+#ifndef _HAGL_GALACTIC_HAL_H
+#define _HAGL_GALACTIC_HAL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,13 +44,13 @@ extern "C" {
 #include <hagl/color.h>
 
 /* HAL must provide display dimensions and depth. This HAL */
-/* defaults to 320x240. Alternative dimensions can be passed */
+/* defaults to 53x11. Alternative dimensions can be passed */
 /* using compiler flags. */
 #ifndef DISPLAY_WIDTH
-#define DISPLAY_WIDTH   (320)
+#define DISPLAY_WIDTH   (53)
 #endif
 #ifndef DISPLAY_HEIGHT
-#define DISPLAY_HEIGHT  (240)
+#define DISPLAY_HEIGHT  (11)
 #endif
 #define DISPLAY_DEPTH   (24)
 
@@ -62,17 +63,7 @@ typedef uint32_t color_t;
 void
 hagl_hal_init(hagl_backend_t *backend);
 
-/**
- * @brief Convert RGB to HAL color type
- *
- * This is used for HAL implementations which use some other pixel
- * format than RGB565.
- */
-// static inline color_t hagl_hal_color(uint8_t r, uint8_t g, uint8_t b) {
-//     return (r << 16) | (g << 8) | (b);
-// }
-
 #ifdef __cplusplus
 }
 #endif
-#endif /* _HAGL_GD_HAL_H */
+#endif /* _HAGL_GALACTIC_HAL_H */

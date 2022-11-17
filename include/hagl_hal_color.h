@@ -24,15 +24,15 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for the HAGL graphics library:
-https://github.com/tuupola/hagl_gd
+This file is part of the Galactic HAL for the HAGL graphics library:
+https://github.com/disq/hagl_galactic
 
 SPDX-License-Identifier: MIT
 
 */
 
-#ifndef _HAGL_GD_HAL_COLOR_H
-#define _HAGL_GD_HAL_COLOR_H
+#ifndef _HAGL_GALACTIC_HAL_COLOR_H
+#define _HAGL_GALACTIC_HAL_COLOR_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,4 +46,4 @@ typedef uint32_t color_t;
 #ifdef __cplusplus
 }
 #endif
-#endif /* _HAGL_GD_HAL_COLOR_H */
+#endif /* _HAGL_GALACTIC_HAL_COLOR_H */

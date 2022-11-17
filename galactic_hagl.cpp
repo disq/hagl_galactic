@@ -3,6 +3,7 @@
 MIT License
 
 Copyright (c) 2018-2022 Mika Tuupola
+Copyright (c) 2022 Kemal Hadimli
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +25,8 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for the HAGL graphics library:
-https://github.com/tuupola/hagl_gd
+This file is part of the Galactic HAL for the HAGL graphics library:
+https://github.com/disq/hagl_galactic
 
 SPDX-License-Identifier: MIT
 
@@ -33,48 +34,54 @@ SPDX-License-Identifier: MIT
 
 #include <stdio.h>
 #include <stdint.h>
-#include <gd.h>
 #include <rgb565.h>
 #include <hagl/backend.h>
 
-#include "hagl_hal.h"
+#include "include/hagl_hal.h"
 
-static gdImagePtr img;
-FILE *png;
+#include "pico/stdlib.h"
+#include "libraries/pico_graphics/pico_graphics.hpp"
+#include "galactic_unicorn.hpp"
+
+using namespace pimoroni;
+
+PicoGraphics_PenRGB888 graphics(53, 11, nullptr);
+GalacticUnicorn galactic_unicorn;
 
 static void
 put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
 {
-    gdImageSetPixel(img, x0, y0, color);
+  uint8_t r = (color >> 16);
+  uint8_t g = (color >> 8) & 0xFF;
+  uint8_t b = color & 0xFF;
+  graphics.set_pen(r, g, b);
+  graphics.pixel(Point(x0, y0));
 }
 
 static size_t
 flush(void *self)
 {
-    /* Output the current frame as png file. */
-    png = fopen("hagl.png", "wb");
-    gdImagePng(img, png);
-    fclose(png);
+    galactic_unicorn.update(&graphics);
     return DISPLAY_WIDTH * DISPLAY_HEIGHT * DISPLAY_DEPTH / 8;
 }
 
 static void
 close(void *self)
 {
-    /* Release the memory acquired earlier with gdImageCreateTrueColor() */
-    gdImageDestroy(img);
+  graphics.clear();
 }
 
 static color_t
 color(void *self, uint8_t r, uint8_t g, uint8_t b) {
-    // return gdTrueColor(r, g, b);
     return (r << 16) | (g << 8) | (b);
 }
 
 void
 hagl_hal_init(hagl_backend_t *backend)
 {
-    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+    galactic_unicorn.init();
+    graphics.set_pen(0, 0, 0);
+    graphics.clear();
 
     backend->width = DISPLAY_WIDTH;
     backend->height = DISPLAY_HEIGHT;
