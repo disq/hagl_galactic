@@ -42,6 +42,7 @@ extern "C" {
 #include <stdint.h>
 #include <hagl/backend.h>
 #include <hagl/color.h>
+#include "hagl_hal_color.h"
 
 /* HAL must provide display dimensions and depth. This HAL */
 /* defaults to 106x22 which is twice the size of the hardware screen at 53x11.
@@ -62,9 +63,6 @@ extern "C" {
 #ifndef GALACTIC_PIXEL_DIVISOR_Y
 #define GALACTIC_PIXEL_DIVISOR_Y  (1)
 #endif
-
-/** HAL must provide typedef for colors. This HAL uses RGB888. */
-typedef uint32_t color_t;
 
 /**
  * @brief Initialize the backend

@@ -34,7 +34,6 @@ SPDX-License-Identifier: MIT
 
 #include <stdio.h>
 #include <stdint.h>
-#include <rgb565.h>
 #include <hagl/backend.h>
 
 #include "include/hagl_hal.h"
